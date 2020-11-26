@@ -1,0 +1,8 @@
+#container{
+	background-color: #232323;
+}
+#square{
+	width: 30%;
+	background-color: white;
+	border: red;
+}

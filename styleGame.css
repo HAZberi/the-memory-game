@@ -1,0 +1,78 @@
+/* Giving Body a Background Color*/
+body {
+  margin: 0;
+  background-color: #232323;
+  font-family: "Tahoma";
+}
+#colorDisplay {
+  font-size: 200%;
+}
+#container {
+  width: 40%;
+  /*Margin Auto is used in the parent element to center align child elements*/
+  margin: 3% auto;
+}
+/*h1{
+	margin: auto;
+}*/
+.square {
+  /*Each square will only take up 30% of the div which makes 3 sidebyside divs occupy 90% total and a margin of 1.66 is added */
+  width: 30%;
+  margin: 1.66%;
+  /*float is used to move the subsequent divs to the left with respect to parent div*/
+  float: left;
+  /*Padding bottom is added to create space otherwise nothing will be displayed since all the divs are empty;*/
+  padding-bottom: 30%;
+  border-radius: 15%;
+  transition: background-color 0.75s;
+  -webkit-transition: all 0.75s;
+  -moz-transition: all 0.75s;
+}
+h1 {
+  color: white;
+  text-align: center;
+  background-color: steelblue;
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: normal;
+  padding-bottom: 0.8%;
+  padding-top: 0.8%;
+  line-height: 1.1;
+}
+#message {
+  /*To Create Space in inline element first make it inline-block*/
+  display: inline-block;
+  /*now you have to set the width to get the space*/
+  width: 20%;
+}
+.stripe {
+  height: 30px;
+  /*margin: auto; This property only work on divs not on text and button*/
+  background: white;
+  text-align: center;
+}
+.selected {
+  background-color: steelblue;
+  color: white;
+}
+button {
+  height: 100%;
+  border: none;
+  color: steelblue;
+  background-color: white;
+  font-size: inherit;
+  font-weight: bold;
+  text-transform: uppercase;
+  /*ouline apears when a button is selected and its by default from the broweser*/
+  outline: none;
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+button:hover {
+  background-color: steelblue;
+  color: white;
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
