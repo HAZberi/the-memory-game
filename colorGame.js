@@ -4,8 +4,9 @@
 const container = document.querySelector("#cards-container");
 const images = document.querySelectorAll(".image");
 const covers = document.querySelectorAll(".cover");
-const cards = document.querySelectorAll('.card')
+const cards = document.querySelectorAll(".card");
 const headerDisplay = document.querySelector("h1");
+const message = document.querySelector('#message');
 
 let openedCards = [];
 
@@ -37,9 +38,11 @@ const updateDisplay = function (arr) {
 const displayMatchResult = function (arr) {
   if (!(arr.length === 2)) return;
   if (isMatch(arr[0].src, arr[1].src)) {
-    console.log("Great Work");
+    message.textContent = '';
+    message.insertAdjacentText('beforeend', 'Shabbashhh!!');
   } else {
-    console.log("Try Again");
+    message.textContent = '';
+    message.insertAdjacentText('beforeend', 'Beta Tum Sai Na Ho Paye Ga');
   }
 };
 
@@ -47,6 +50,10 @@ const isMatch = function (d1, d2) {
   if (d1 === d2) return true;
   return false;
 };
+
+const gameLevels = [6, 8, 12, 20];
+
+
 
 const imgUrls = [
   "./img/img-1.jpg",
@@ -81,43 +88,40 @@ const resetImgs = function (urls) {
   });
 };
 
-//Pending Tasks
-//Check cards count --- should be even 
-const selectLevels = function(urls, cardsCount){
-  if(cardsCount%2 !== 0) return alert('Please Enter an Even Number')
+const selectLevels = function (urls, cardsCount) {
+  if (cardsCount % 2 !== 0) return alert("Please Enter an Even Number");
   let imgArr = [];
-  urls.forEach((url, i)=>{
-    if(((cardsCount/2)>i)){
+  urls.forEach((url, i) => {
+    if (cardsCount / 2 > i) {
       imgArr.push(url);
     }
-  })
+  });
   imgArr = [...imgArr, ...imgArr];
   return imgArr;
-}
+};
 
-const displayLevels = function(urls){
-  cards.forEach(card => card.style.display = 'none');
-  urls.forEach((_, i) => cards[i].style.display = 'block');
+const displayLevels = function (urls) {
+  cards.forEach((card) => (card.style.display = "none"));
+  urls.forEach((_, i) => (cards[i].style.display = "block"));
   resetImgs(urls);
-  if(urls.length < 7){
-    urls.forEach((_, i)=>{
-        container.style.width = '60%';
-        cards[i].classList.remove('cards');
-        cards[i].classList.remove('cardsFour');
-        cards[i].classList.add('cardsThree');
-    })
+  if (urls.length < 7) {
+    urls.forEach((_, i) => {
+      container.style.width = "60%";
+      cards[i].classList.remove("cards");
+      cards[i].classList.remove("cardsFour");
+      cards[i].classList.remove("cardsFive");
+      cards[i].classList.add("cardsThree");
+    });
   }
-  if(urls.length > 12){
-    container.style.width = '90%';
-    urls.forEach((_, i)=>{
-      cards[i].classList.remove('cards');
-      cards[i].classList.remove('cardsThree');
-      cards[i].classList.remove('cardsFour');
-      cards[i].classList.add('cardsFive');
-  })
+  if (urls.length > 12) {
+    container.style.width = "90%";
+    urls.forEach((_, i) => {
+      cards[i].classList.remove("cards");
+      cards[i].classList.remove("cardsThree");
+      cards[i].classList.remove("cardsFour");
+      cards[i].classList.add("cardsFive");
+    });
   }
-}
-
-console.log(cards);
+};
 displayLevels(selectLevels(imgUrls, 8));
 //resetImgs(imgUrls);
