@@ -65,6 +65,9 @@ h1 {
   padding-bottom: 0.8%;
   padding-top: 0.8%;
   line-height: 1.1;
+  transition: background-color 0.75s;
+  -webkit-transition: all 0.75s;
+  -moz-transition: all 0.75s;
 }
 .stripe {
   height: 30px;

@@ -7,6 +7,8 @@ const covers = document.querySelectorAll(".cover");
 const cards = document.querySelectorAll(".card");
 const headerDisplay = document.querySelector("h1");
 const message = document.querySelector('#message');
+const stripe = document.querySelector('.stripe');
+const buttons = document.querySelectorAll('button');
 
 let openedCards = [];
 
@@ -40,11 +42,22 @@ const displayMatchResult = function (arr) {
   if (isMatch(arr[0].src, arr[1].src)) {
     message.textContent = '';
     message.insertAdjacentText('beforeend', 'Shabbashhh!! ');
+    if (!(checkAllMatches(gameLevel, gameLevels[3]))) return;
+    headerDisplay.textContent = '';
+    headerDisplay.textContent = 'That took a while.... 🤔';
+    headerDisplay.style.backgroundColor = 'limegreen';
   } else {
     message.textContent = '';
     message.insertAdjacentText('beforeend', 'Beta Tum Sai Na Ho Paye Ga 😏😏');
   }
 };
+
+const checkAllMatches = function(cardsCount, totalCards){
+  const unopenedImgs = [...images].filter(image => image.style.display === 'none');
+  if((totalCards - unopenedImgs.length) === cardsCount) return true;
+  return false;
+}
+
 
 const isMatch = function (d1, d2) {
   if (d1 === d2) return true;
@@ -52,6 +65,36 @@ const isMatch = function (d1, d2) {
 };
 
 const gameLevels = [6, 8, 12, 20];
+let gameLevel = gameLevels[1];
+
+stripe.addEventListener('click', function(e){
+  e.stopPropagation();
+  if(e.target.id === 'reset') displayLevels(selectLevels(imgUrls, gameLevel));
+  if(e.target.textContent === 'Nanny') {
+    displayLevels(selectLevels(imgUrls, gameLevels[0]));
+    buttons.forEach(btn => btn.classList.remove('selected'));
+    e.target.classList.add('selected');
+    gameLevel = gameLevels[0];
+  }
+  if(e.target.textContent === 'Mommy') {
+    displayLevels(selectLevels(imgUrls, gameLevels[1]));
+    buttons.forEach(btn => btn.classList.remove('selected'));
+    e.target.classList.add('selected');
+    gameLevel = gameLevels[1];
+  }
+  if(e.target.textContent === 'Wifey'){
+    displayLevels(selectLevels(imgUrls, gameLevels[2]));
+    buttons.forEach(btn => btn.classList.remove('selected'));
+    e.target.classList.add('selected');
+    gameLevel = gameLevels[2];
+  }
+  if(e.target.textContent === 'Crush') {
+    displayLevels(selectLevels(imgUrls, gameLevels[3]));
+    buttons.forEach(btn => btn.classList.remove('selected'));
+    e.target.classList.add('selected');
+    gameLevel = gameLevels[3];
+  }
+});
 
 
 
@@ -62,12 +105,20 @@ const imgUrls = [
   "./img/img-4.jpg",
   "./img/img-5.jpg",
   "./img/img-6.jpg",
+  "./img/img-7.jpg",
+  "./img/img-8.jpg",
+  "./img/img-9.jpg",
+  "./img/img-10.jpg",
   "./img/img-1.jpg",
   "./img/img-2.jpg",
   "./img/img-3.jpg",
   "./img/img-4.jpg",
   "./img/img-5.jpg",
   "./img/img-6.jpg",
+  "./img/img-7.jpg",
+  "./img/img-8.jpg",
+  "./img/img-9.jpg",
+  "./img/img-10.jpg"
 ];
 
 const shuffleArray = function (arr) {
@@ -81,6 +132,7 @@ const shuffleArray = function (arr) {
 };
 
 const resetImgs = function (urls) {
+  console.clear()
   urls = shuffleArray(urls);
   urls.forEach((url, i) => {
     images[i].src = url;
@@ -100,27 +152,48 @@ const selectLevels = function (urls, cardsCount) {
   return imgArr;
 };
 
+
+const threeInARow = function(urls){
+  urls.forEach((_, i) => {
+    container.style.width = "60%";
+    cards[i].classList.remove("cards");
+    cards[i].classList.remove("cardsFour");
+    cards[i].classList.remove("cardsFive");
+    cards[i].classList.add("cardsThree");
+  });
+}
+
+const fiveInARow = function(urls){
+  container.style.width = "90%";
+  urls.forEach((_, i) => {
+    cards[i].classList.remove("cards");
+    cards[i].classList.remove("cardsThree");
+    cards[i].classList.remove("cardsFour");
+    cards[i].classList.add("cardsFive");
+  });
+}
+
+const fourInARow = function(urls){
+  container.style.width = "75%";
+  urls.forEach((_, i) => {
+    cards[i].classList.remove("cards");
+    cards[i].classList.remove("cardsThree");
+    cards[i].classList.remove("cardsFive");
+    cards[i].classList.add("cardsFour");
+  });
+}
+
 const displayLevels = function (urls) {
-  cards.forEach((card) => (card.style.display = "none"));
-  urls.forEach((_, i) => (cards[i].style.display = "block"));
+  cards.forEach((card, i) => {
+    card.style.display = "none";
+    images[i].style.display = 'none';
+  });
+  urls.forEach((_, i) => {
+    cards[i].style.display = "block";
+    covers[i].style.display = 'block';
+  });
   resetImgs(urls);
-  if (urls.length < 7) {
-    urls.forEach((_, i) => {
-      container.style.width = "60%";
-      cards[i].classList.remove("cards");
-      cards[i].classList.remove("cardsFour");
-      cards[i].classList.remove("cardsFive");
-      cards[i].classList.add("cardsThree");
-    });
-  }
-  if (urls.length > 12) {
-    container.style.width = "90%";
-    urls.forEach((_, i) => {
-      cards[i].classList.remove("cards");
-      cards[i].classList.remove("cardsThree");
-      cards[i].classList.remove("cardsFour");
-      cards[i].classList.add("cardsFive");
-    });
-  }
+  if (urls.length < 7) threeInARow(urls);
+  if (urls.length > 12) fiveInARow(urls);
 };
-displayLevels(selectLevels(imgUrls, 8));
+displayLevels(selectLevels(imgUrls, gameLevel));
