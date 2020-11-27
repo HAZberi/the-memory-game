@@ -193,7 +193,10 @@ const displayLevels = function (urls) {
     covers[i].style.display = 'block';
   });
   resetImgs(urls);
+  console.log(urls.length);
   if (urls.length < 7) threeInARow(urls);
   if (urls.length > 12) fiveInARow(urls);
+  if (urls.length <= 12 && urls.length >= 7) fourInARow(urls);
 };
+
 displayLevels(selectLevels(imgUrls, gameLevel));
