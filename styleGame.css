@@ -4,30 +4,42 @@ body {
   background-color: #232323;
   font-family: "Tahoma";
 }
-#colorDisplay {
-  font-size: 200%;
-}
-#container {
-  width: 40%;
+#cards-container {
+  width: 50%;
   /*Margin Auto is used in the parent element to center align child elements*/
   margin: 3% auto;
+  display: flex;
+  flex-wrap: wrap;
 }
 /*h1{
 	margin: auto;
 }*/
-.square {
+.cards {
   /*Each square will only take up 30% of the div which makes 3 sidebyside divs occupy 90% total and a margin of 1.66 is added */
   width: 30%;
   margin: 1.66%;
   /*float is used to move the subsequent divs to the left with respect to parent div*/
-  float: left;
+  /* float: left; */
+  
   /*Padding bottom is added to create space otherwise nothing will be displayed since all the divs are empty;*/
-  padding-bottom: 30%;
-  border-radius: 15%;
-  transition: background-color 0.75s;
+  /* background-color: antiquewhite; */
+/*   transition: background-color 0.75s;
   -webkit-transition: all 0.75s;
-  -moz-transition: all 0.75s;
+  -moz-transition: all 0.75s; */
 }
+.cover{
+  width: 100%;
+  /*Padding bottom is added to create space otherwise nothing will be displayed since all the divs are empty;
+  67% is roughly the height of the images*/
+  padding-bottom: 67%;
+  background-color: antiquewhite;
+}
+.image{
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
 h1 {
   color: white;
   text-align: center;
@@ -39,18 +51,35 @@ h1 {
   padding-top: 0.8%;
   line-height: 1.1;
 }
-#message {
-  /*To Create Space in inline element first make it inline-block*/
-  display: inline-block;
-  /*now you have to set the width to get the space*/
-  width: 20%;
-}
 .stripe {
   height: 30px;
   /*margin: auto; This property only work on divs not on text and button*/
   background: white;
   text-align: center;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#message {
+  /*To Create Space in inline element first make it inline-block*/
+  display: inline-block;
+  /*now you have to set the width to get the space*/
+  width: 20%;
+}
+
 .selected {
   background-color: steelblue;
   color: white;

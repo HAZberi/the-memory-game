@@ -1,16 +1,74 @@
+"use strict";
 
+//DOM Selection
+const container = document.querySelector("#cards-container");
+const images = document.querySelectorAll(".image");
+const covers = document.querySelectorAll(".cover");
+const headerDisplay = document.querySelector("h1");
+
+let openedCards = [];
+let score = 0;
+let matchedCards = [];
+
+container.addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (!e.target.classList.contains("cover")) return;
+  const card = e.target.closest(".cards");
+  const image = card.querySelector(".image");
+  openedCards = updateDisplay(openedCards);
+  image.style.display = "block";
+  e.target.style.display = "none";
+  openedCards.push(image);
+  displayMatchResult(openedCards);
+});
+
+const updateDisplay = function (arr) {
+  if (!(arr.length === 2)) return arr;
+  if (isMatch(arr[0].src, arr[1].src)) {
+  } else {
+    arr.forEach((el) => {
+      el.style.display = "none";
+      el.closest(".cards").querySelector(".cover").style.display = "block";
+    });
+  }
+  arr.splice(0, 2);
+  return arr;
+};
+
+const displayMatchResult = function (arr) {
+	if(!(arr.length === 2)) return
+	if (isMatch(arr[0].src, arr[1].src)) {
+		console.log("Great Work");
+		score++;
+	  } else {
+		console.log("Try Again");
+	  }
+}
+
+const isMatch = function (d1, d2) {
+  if (d1 === d2) return true;
+  return false;
+};
+
+// covers.forEach(cover => cover.style.display = 'block')
+// images.forEach(image => image.style.display = 'none')
+// setTimeout(()=>{
+// 	covers.forEach(cover => cover.style.display = 'none')
+// 	images.forEach(image => image.style.display = 'block')
+// 	setTimeout(()=>{
+// 		covers.forEach(cover => cover.style.display = 'block')
+// 		images.forEach(image => image.style.display = 'none')
+// 	}, 3000);
+// }, 3000);
+
+/* 
 // global Variables
 var numColors = 6;
 var colors = [];
 var pickedColor;
 
 // DOM Selection
-var squares = document.querySelectorAll(".square");
-var colorDisplay = document.getElementById("colorDisplay");
-var messageDisplay = document.getElementById("message");
-var headerDisplay = document.querySelector("h1");
-var newColors = document.querySelector("#reset");
-var modeBtn = document.querySelectorAll(".mode");
+
 
 //Game initialization
 init();
@@ -108,3 +166,4 @@ function populateColors(num){
 	//console.log(arr);
 	return arr;
 };
+ */
