@@ -5,7 +5,7 @@ body {
   font-family: "Tahoma";
 }
 #cards-container {
-  width: 50%;
+  width: 70%;
   /*Margin Auto is used in the parent element to center align child elements*/
   margin: 3% auto;
   display: flex;
@@ -16,8 +16,8 @@ body {
 }*/
 .cards {
   /*Each square will only take up 30% of the div which makes 3 sidebyside divs occupy 90% total and a margin of 1.66 is added */
-  width: 30%;
-  margin: 1.66%;
+  width: 22%;
+  margin: 1.5%;
   /*float is used to move the subsequent divs to the left with respect to parent div*/
   /* float: left; */
   

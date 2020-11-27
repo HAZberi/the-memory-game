@@ -50,6 +50,15 @@ const isMatch = function (d1, d2) {
   return false;
 };
 
+const shuffleArray = function(arr){
+	for (let i = arr.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        let temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
+
 // covers.forEach(cover => cover.style.display = 'block')
 // images.forEach(image => image.style.display = 'none')
 // setTimeout(()=>{
