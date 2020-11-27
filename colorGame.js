@@ -39,10 +39,10 @@ const displayMatchResult = function (arr) {
   if (!(arr.length === 2)) return;
   if (isMatch(arr[0].src, arr[1].src)) {
     message.textContent = '';
-    message.insertAdjacentText('beforeend', 'Shabbashhh!!');
+    message.insertAdjacentText('beforeend', 'Shabbashhh!! ');
   } else {
     message.textContent = '';
-    message.insertAdjacentText('beforeend', 'Beta Tum Sai Na Ho Paye Ga');
+    message.insertAdjacentText('beforeend', 'Beta Tum Sai Na Ho Paye Ga 😏😏');
   }
 };
 
@@ -124,4 +124,3 @@ const displayLevels = function (urls) {
   }
 };
 displayLevels(selectLevels(imgUrls, 8));
-//resetImgs(imgUrls);
