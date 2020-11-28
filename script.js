@@ -9,6 +9,8 @@ const headerDisplay = document.querySelector("h1");
 const message = document.querySelector('#message');
 const stripe = document.querySelector('.stripe');
 const buttons = document.querySelectorAll('button');
+const header = document.querySelector('header');
+const nav = document.querySelector('.header')
 
 let openedCards = [];
 
@@ -132,11 +134,11 @@ const shuffleArray = function (arr) {
 };
 
 const resetImgs = function (urls) {
-  console.clear()
+  //console.clear()
   urls = shuffleArray(urls);
   urls.forEach((url, i) => {
     images[i].src = url;
-    console.log(images[i]);
+    //console.log(images[i]);
   });
 };
 
@@ -197,5 +199,54 @@ const displayLevels = function (urls) {
   if (urls.length > 12) fiveInARow(urls);
   if (urls.length <= 12 && urls.length >= 7) fourInARow(urls);
 };
+
+const headerHeight = parseFloat(getComputedStyle(header).height);
+
+const options = {
+  root: null,
+  rootMargin: `${headerHeight}px`,
+  threshold: 0,
+};
+
+const fade = function (el, type, ms) {
+  let fadeIn = type === 'in';
+  let opacity = fadeIn ? 0 : 1;
+  const interval = 50;
+  const duration = ms;
+  const gap = interval / duration;
+  const intervalCallback = function () {
+    opacity = fadeIn ? opacity + gap : parseFloat((opacity - gap).toFixed(1));
+    el.style.opacity = opacity;
+    if (opacity <= 0) el.style.display = 'none';
+    if (opacity <= 0 || opacity >= 1) clearInterval(fading);
+  };
+  if (fadeIn) {
+    el.style.display = 'flex';
+    el.style.opacity = opacity;
+  }
+  const fading = setInterval(intervalCallback, interval);
+  return fading;
+};
+
+const toggleNav = function(entries) {
+  entries.forEach(entry =>{
+    if (!entry.isIntersecting) {
+      nav.classList.add('sticky');
+      fade(nav, 'in', 150);
+    } else {
+      fade(nav, 'out', 100);
+      setTimeout(() => {
+        nav.classList.remove('sticky');
+        nav.style.opacity = 1;
+        nav.style.display = 'flex';
+       }, 100);
+    }
+  })
+}
+
+
+
+const headerObserver = new IntersectionObserver(toggleNav, options);
+headerObserver.observe(header);
 
 displayLevels(selectLevels(imgUrls, gameLevel));

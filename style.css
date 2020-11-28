@@ -57,6 +57,7 @@ body {
 
 h1 {
   color: white;
+  width: 100%;
   text-align: center;
   background-color: steelblue;
   text-transform: uppercase;
@@ -70,6 +71,7 @@ h1 {
   -moz-transition: all 0.75s;
 }
 .stripe {
+  width: 100%;
   height: 30px;
   /*margin: auto; This property only work on divs not on text and button*/
   background: white;
@@ -108,4 +110,18 @@ button:hover {
   transition: all 0.4s;
   -webkit-transition: all 0.4s;
   -moz-transition: all 0.4s;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  z-index: 100;
+}
+
+/* nav and stickly class at the same time */
+.sticky {
+  position: fixed;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.9);
 }
