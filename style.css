@@ -40,6 +40,13 @@ body {
   -webkit-transition: all 1s;
   -moz-transition: all 1s;
 }
+.cardsEight {
+  width: 11.5%;
+  margin: 0.5%;
+  transition: all 1s;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+}
 .cover {
   width: 100%;
   /*Padding bottom is added to create space otherwise nothing will be displayed since all the divs are empty;
@@ -82,14 +89,19 @@ h1 {
   /*To Create Space in inline element first make it inline-block*/
   display: inline-block;
   /*now you have to set the width to get the space*/
-  width: 35%;
-  margin-left: 15%;
+  width: 40%;
+  margin-left: 0%;
 }
 
 .selected {
   background-color: steelblue;
   color: whitesmoke;
 }
+.moves {
+    background-color: steelblue;
+    color: whitesmoke;
+    text-transform: capitalize;
+  }
 button {
   height: 100%;
   border: none;
@@ -122,5 +134,5 @@ button:hover {
 .header.sticky {
   position: fixed;
   top: 0;
-  opacity: 0.95;
+  opacity: 0.80;
 }
