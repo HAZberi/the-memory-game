@@ -12,40 +12,40 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
 }
-/*h1{
-	margin: auto;
-}*/
 .cards {
-  /*Each square will only take up 30% of the div which makes 3 sidebyside divs occupy 90% total and a margin of 1.66 is added */
   width: 22%;
   margin: 1.5%;
-  /*float is used to move the subsequent divs to the left with respect to parent div*/
-  /* float: left; */
-
-  /*Padding bottom is added to create space otherwise nothing will be displayed since all the divs are empty;*/
-  /* background-color: antiquewhite; */
-  /*   transition: background-color 0.75s;
-  -webkit-transition: all 0.75s;
-  -moz-transition: all 0.75s; */
+  transition: all 1s;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
 }
 .cardsFour {
   width: 22%;
   margin: 1.5%;
+  transition: all 1s;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
 }
 .cardsThree {
   width: 30%;
   margin: 1.66%;
+  transition: all 1s;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
 }
 .cardsFive {
   width: 17.5%;
   margin: 1.0%;
+  transition: all 1s;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
 }
 .cover {
   width: 100%;
   /*Padding bottom is added to create space otherwise nothing will be displayed since all the divs are empty;
   67% is roughly the height of the images*/
   padding-bottom: 67%;
-  background-color: antiquewhite;
+  background-color: blanchedalmond;
   border-radius: 5%;
 }
 .image {
@@ -56,7 +56,7 @@ body {
 }
 
 h1 {
-  color: white;
+  color: whitesmoke;
   width: 100%;
   text-align: center;
   background-color: steelblue;
@@ -74,7 +74,7 @@ h1 {
   width: 100%;
   height: 30px;
   /*margin: auto; This property only work on divs not on text and button*/
-  background: white;
+  background: whitesmoke;
   text-align: center;
 }
 
@@ -88,13 +88,13 @@ h1 {
 
 .selected {
   background-color: steelblue;
-  color: white;
+  color: whitesmoke;
 }
 button {
   height: 100%;
   border: none;
   color: steelblue;
-  background-color: white;
+  background-color: whitesmoke;
   font-size: inherit;
   font-weight: bold;
   text-transform: uppercase;
@@ -106,7 +106,7 @@ button {
 }
 button:hover {
   background-color: steelblue;
-  color: white;
+  color: whitesmoke;
   transition: all 0.4s;
   -webkit-transition: all 0.4s;
   -moz-transition: all 0.4s;
@@ -117,11 +117,10 @@ button:hover {
   flex-wrap: wrap;
   width: 100%;
   z-index: 100;
+  opacity: 1;
 }
-
-/* nav and stickly class at the same time */
-.sticky {
+.header.sticky {
   position: fixed;
   top: 0;
-  background-color: rgba(255, 255, 255, 0.9);
+  opacity: 0.95;
 }

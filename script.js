@@ -6,11 +6,11 @@ const images = document.querySelectorAll(".image");
 const covers = document.querySelectorAll(".cover");
 const cards = document.querySelectorAll(".card");
 const headerDisplay = document.querySelector("h1");
-const message = document.querySelector('#message');
-const stripe = document.querySelector('.stripe');
-const buttons = document.querySelectorAll('button');
-const header = document.querySelector('header');
-const nav = document.querySelector('.header')
+const message = document.querySelector("#message");
+const stripe = document.querySelector(".stripe");
+const buttons = document.querySelectorAll("button");
+const header = document.querySelector("header");
+const nav = document.querySelector(".header");
 
 let openedCards = [];
 
@@ -42,24 +42,25 @@ const updateDisplay = function (arr) {
 const displayMatchResult = function (arr) {
   if (!(arr.length === 2)) return;
   if (isMatch(arr[0].src, arr[1].src)) {
-    message.textContent = '';
-    message.insertAdjacentText('beforeend', 'Shabbashhh!! ');
-    if (!(checkAllMatches(gameLevel, gameLevels[3]))) return;
-    headerDisplay.textContent = '';
-    headerDisplay.textContent = 'That took a while.... 🤔';
-    headerDisplay.style.backgroundColor = 'limegreen';
+    message.textContent = "";
+    message.insertAdjacentText("beforeend", "Shabbashhh!! ");
+    if (!checkAllMatches(gameLevel, gameLevels[3])) return;
+    headerDisplay.textContent = "";
+    headerDisplay.textContent = "That took a while.... 🤔";
+    headerDisplay.style.backgroundColor = "limegreen";
   } else {
-    message.textContent = '';
-    message.insertAdjacentText('beforeend', 'Beta Tum Sai Na Ho Paye Ga 😏😏');
+    message.textContent = "";
+    message.insertAdjacentText("beforeend", "Beta Tum Sai Na Ho Paye Ga 😏😏");
   }
 };
 
-const checkAllMatches = function(cardsCount, totalCards){
-  const unopenedImgs = [...images].filter(image => image.style.display === 'none');
-  if((totalCards - unopenedImgs.length) === cardsCount) return true;
+const checkAllMatches = function (cardsCount, totalCards) {
+  const unopenedImgs = [...images].filter(
+    (image) => image.style.display === "none"
+  );
+  if (totalCards - unopenedImgs.length === cardsCount) return true;
   return false;
-}
-
+};
 
 const isMatch = function (d1, d2) {
   if (d1 === d2) return true;
@@ -69,36 +70,34 @@ const isMatch = function (d1, d2) {
 const gameLevels = [6, 8, 12, 20];
 let gameLevel = gameLevels[1];
 
-stripe.addEventListener('click', function(e){
+stripe.addEventListener("click", function (e) {
   e.stopPropagation();
-  if(e.target.id === 'reset') displayLevels(selectLevels(imgUrls, gameLevel));
-  if(e.target.textContent === 'Nanny') {
+  if (e.target.id === "reset") displayLevels(selectLevels(imgUrls, gameLevel));
+  if (e.target.textContent === "Trial") {
     displayLevels(selectLevels(imgUrls, gameLevels[0]));
-    buttons.forEach(btn => btn.classList.remove('selected'));
-    e.target.classList.add('selected');
+    buttons.forEach((btn) => btn.classList.remove("selected"));
+    e.target.classList.add("selected");
     gameLevel = gameLevels[0];
   }
-  if(e.target.textContent === 'Mommy') {
+  if (e.target.textContent === "Easy") {
     displayLevels(selectLevels(imgUrls, gameLevels[1]));
-    buttons.forEach(btn => btn.classList.remove('selected'));
-    e.target.classList.add('selected');
+    buttons.forEach((btn) => btn.classList.remove("selected"));
+    e.target.classList.add("selected");
     gameLevel = gameLevels[1];
   }
-  if(e.target.textContent === 'Wifey'){
+  if (e.target.textContent === "Medium") {
     displayLevels(selectLevels(imgUrls, gameLevels[2]));
-    buttons.forEach(btn => btn.classList.remove('selected'));
-    e.target.classList.add('selected');
+    buttons.forEach((btn) => btn.classList.remove("selected"));
+    e.target.classList.add("selected");
     gameLevel = gameLevels[2];
   }
-  if(e.target.textContent === 'Crush') {
+  if (e.target.textContent === "Hard") {
     displayLevels(selectLevels(imgUrls, gameLevels[3]));
-    buttons.forEach(btn => btn.classList.remove('selected'));
-    e.target.classList.add('selected');
+    buttons.forEach((btn) => btn.classList.remove("selected"));
+    e.target.classList.add("selected");
     gameLevel = gameLevels[3];
   }
 });
-
-
 
 const imgUrls = [
   "./img/img-1.jpg",
@@ -120,7 +119,7 @@ const imgUrls = [
   "./img/img-7.jpg",
   "./img/img-8.jpg",
   "./img/img-9.jpg",
-  "./img/img-10.jpg"
+  "./img/img-10.jpg",
 ];
 
 const shuffleArray = function (arr) {
@@ -154,8 +153,7 @@ const selectLevels = function (urls, cardsCount) {
   return imgArr;
 };
 
-
-const threeInARow = function(urls){
+const threeInARow = function (urls) {
   urls.forEach((_, i) => {
     container.style.width = "60%";
     cards[i].classList.remove("cards");
@@ -163,9 +161,9 @@ const threeInARow = function(urls){
     cards[i].classList.remove("cardsFive");
     cards[i].classList.add("cardsThree");
   });
-}
+};
 
-const fiveInARow = function(urls){
+const fiveInARow = function (urls) {
   container.style.width = "90%";
   urls.forEach((_, i) => {
     cards[i].classList.remove("cards");
@@ -173,9 +171,9 @@ const fiveInARow = function(urls){
     cards[i].classList.remove("cardsFour");
     cards[i].classList.add("cardsFive");
   });
-}
+};
 
-const fourInARow = function(urls){
+const fourInARow = function (urls) {
   container.style.width = "75%";
   urls.forEach((_, i) => {
     cards[i].classList.remove("cards");
@@ -183,16 +181,16 @@ const fourInARow = function(urls){
     cards[i].classList.remove("cardsFive");
     cards[i].classList.add("cardsFour");
   });
-}
+};
 
 const displayLevels = function (urls) {
   cards.forEach((card, i) => {
     card.style.display = "none";
-    images[i].style.display = 'none';
+    images[i].style.display = "none";
   });
   urls.forEach((_, i) => {
     cards[i].style.display = "block";
-    covers[i].style.display = 'block';
+    covers[i].style.display = "block";
   });
   resetImgs(urls);
   if (urls.length < 7) threeInARow(urls);
@@ -200,53 +198,23 @@ const displayLevels = function (urls) {
   if (urls.length <= 12 && urls.length >= 7) fourInARow(urls);
 };
 
-const headerHeight = parseFloat(getComputedStyle(header).height);
-
-const options = {
-  root: null,
-  rootMargin: `${headerHeight}px`,
-  threshold: 0,
-};
-
-const fade = function (el, type, ms) {
-  let fadeIn = type === 'in';
-  let opacity = fadeIn ? 0 : 1;
-  const interval = 50;
-  const duration = ms;
-  const gap = interval / duration;
-  const intervalCallback = function () {
-    opacity = fadeIn ? opacity + gap : parseFloat((opacity - gap).toFixed(1));
-    el.style.opacity = opacity;
-    if (opacity <= 0) el.style.display = 'none';
-    if (opacity <= 0 || opacity >= 1) clearInterval(fading);
+const stickyNav = function () {
+  const options = {
+    root: null,
+    threshold: 0,
   };
-  if (fadeIn) {
-    el.style.display = 'flex';
-    el.style.opacity = opacity;
-  }
-  const fading = setInterval(intervalCallback, interval);
-  return fading;
+  const toggleNav = function (entries) {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) {
+        nav.classList.add("sticky");
+      } else {
+          nav.classList.remove("sticky");
+      }
+    });
+  };
+  const headerObserver = new IntersectionObserver(toggleNav, options);
+  headerObserver.observe(header);
 };
 
-const toggleNav = function(entries) {
-  entries.forEach(entry =>{
-    if (!entry.isIntersecting) {
-      nav.classList.add('sticky');
-      fade(nav, 'in', 150);
-    } else {
-      fade(nav, 'out', 100);
-      setTimeout(() => {
-        nav.classList.remove('sticky');
-        nav.style.opacity = 1;
-        nav.style.display = 'flex';
-       }, 100);
-    }
-  })
-}
-
-
-
-const headerObserver = new IntersectionObserver(toggleNav, options);
-headerObserver.observe(header);
-
+stickyNav();
 displayLevels(selectLevels(imgUrls, gameLevel));
