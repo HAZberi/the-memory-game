@@ -15,9 +15,15 @@ let images = document.querySelectorAll(".image");
 let covers = document.querySelectorAll(".cover");
 let cards = document.querySelectorAll(".card");
 
+//Global Setters
+const gameLevels = [12, 20, 32, 48, 64];
+const imagePaths = 38;
+let imgUrls = [];
+let gameLevel = gameLevels[0];
 let openedCards = [];
 let moves = 0;
 
+//Event Listeners
 container.addEventListener("click", (e) => {
   e.stopPropagation();
   if (!e.target.classList.contains("cover")) return;
@@ -28,6 +34,16 @@ container.addEventListener("click", (e) => {
   e.target.style.display = "none";
   openedCards.push(image);
   displayMatchResult(openedCards);
+});
+
+stripe.addEventListener("click", function (e) {
+  e.stopPropagation();
+  if (e.target.id === "reset") displayLevels(selectLevels(imgUrls, gameLevel));
+  if (e.target.textContent === "Easy") modeHandeller(gameLevels[0], e.target);
+  if (e.target.textContent === "Medium") modeHandeller(gameLevels[1], e.target);
+  if (e.target.textContent === "Hard") modeHandeller(gameLevels[2], e.target);
+  if (e.target.textContent === "Ultra") modeHandeller(gameLevels[3], e.target);
+  if (e.target.textContent === "Legend") modeHandeller(gameLevels[4], e.target);
 });
 
 const updateDisplay = function (arr) {
@@ -61,7 +77,6 @@ const checkAllMatches = function () {
   const unopenedImgs = [...images].filter(
     (image) => image.style.display === "none"
   );
-  console.log(unopenedImgs);
   if (unopenedImgs.length === 0) return true;
   return false;
 };
@@ -71,19 +86,6 @@ const isMatch = function (d1, d2) {
   return false;
 };
 
-const gameLevels = [12, 20, 32, 48, 64];
-let gameLevel = gameLevels[0];
-
-stripe.addEventListener("click", function (e) {
-  e.stopPropagation();
-  if (e.target.id === "reset") displayLevels(selectLevels(imgUrls, gameLevel));
-  if (e.target.textContent === "Easy") modeHandeller(gameLevels[0], e.target);
-  if (e.target.textContent === "Medium") modeHandeller(gameLevels[1], e.target);
-  if (e.target.textContent === "Hard") modeHandeller(gameLevels[2], e.target);
-  if (e.target.textContent === "Ultra") modeHandeller(gameLevels[3], e.target);
-  if (e.target.textContent === "Legend") modeHandeller(gameLevels[4], e.target);
-});
-
 const modeHandeller = function(cardsCount, mode){
   gameLevel = cardsCount;
   cardsCreation(gameLevel);
@@ -91,49 +93,6 @@ const modeHandeller = function(cardsCount, mode){
   buttons.forEach((btn) => btn.classList.remove("selected"));
   mode.classList.add("selected");
 }
-
-const imgUrls = [
-  "./img/img-1.jpg",
-  "./img/img-2.jpg",
-  "./img/img-3.jpg",
-  "./img/img-4.jpg",
-  "./img/img-5.jpg",
-  "./img/img-6.jpg",
-  "./img/img-7.jpg",
-  "./img/img-8.jpg",
-  "./img/img-9.jpg",
-  "./img/img-10.jpg",
-  "./img/img-1.jpg",
-  "./img/img-2.jpg",
-  "./img/img-3.jpg",
-  "./img/img-4.jpg",
-  "./img/img-5.jpg",
-  "./img/img-6.jpg",
-  "./img/img-7.jpg",
-  "./img/img-8.jpg",
-  "./img/img-9.jpg",
-  "./img/img-10.jpg",
-  "./img/img-1.jpg",
-  "./img/img-2.jpg",
-  "./img/img-3.jpg",
-  "./img/img-4.jpg",
-  "./img/img-5.jpg",
-  "./img/img-6.jpg",
-  "./img/img-7.jpg",
-  "./img/img-8.jpg",
-  "./img/img-9.jpg",
-  "./img/img-10.jpg",
-  "./img/img-1.jpg",
-  "./img/img-2.jpg",
-  "./img/img-3.jpg",
-  "./img/img-4.jpg",
-  "./img/img-5.jpg",
-  "./img/img-6.jpg",
-  "./img/img-7.jpg",
-  "./img/img-8.jpg",
-  "./img/img-9.jpg",
-  "./img/img-10.jpg"
-];
 
 const shuffleArray = function (arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -245,6 +204,20 @@ const cardsCreation = function (cardsCount) {
   covers = document.querySelectorAll(".cover");
 };
 
-cardsCreation(gameLevel);
-displayLevels(selectLevels(imgUrls, gameLevel));
-stickyNav();
+const populatePaths = function(totalUrls){
+  let arr = [];
+  for(let i = 0; i < totalUrls; i++){
+    const path = `./img/img-${i+1}.jpg`;
+    arr.push(path);
+  }
+  return arr;
+}
+
+const init = function(){
+  imgUrls = shuffleArray(populatePaths(imagePaths));
+  cardsCreation(gameLevel);
+  displayLevels(selectLevels(imgUrls, gameLevel));
+  stickyNav();
+}
+//Game Init
+init();
