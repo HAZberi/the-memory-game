@@ -38,7 +38,8 @@ container.addEventListener("click", (e) => {
 
 stripe.addEventListener("click", function (e) {
   e.stopPropagation();
-  if (e.target.id === "reset") displayLevels(selectLevels(imgUrls, gameLevel));
+  if (e.target.id === "shuffle") displayLevels(selectLevels(imgUrls, gameLevel));
+  if (e.target.id === "reset") reset();
   if (e.target.textContent === "Easy") modeHandeller(gameLevels[0], e.target);
   if (e.target.textContent === "Medium") modeHandeller(gameLevels[1], e.target);
   if (e.target.textContent === "Hard") modeHandeller(gameLevels[2], e.target);
@@ -157,18 +158,24 @@ const eightInARow = function (urls) {
   });
 };
 
-const displayLevels = function (urls) {
+const reset = function(){
   images.forEach(image => image.style.display = 'none')
   covers.forEach(cover => cover.style.display = 'block');
   moves = 0;
+  message.textContent = "Chalo Khelo 😋";
   movesBtn.textContent = `Moves: ${moves}`;
   headerDisplay.textContent = "Match Up";
   headerDisplay.style.backgroundColor = "steelblue";
+}
+
+const displayLevels = function (urls) {
+  reset();
   resetImgs(urls);
   if (urls.length <= 12 && urls.length > 6) fourInARow(urls);
   if (urls.length <=20 && urls.length > 12) fiveInARow(urls);
   if (urls.length > 20) eightInARow(urls);
 };
+
 
 const stickyNav = function () {
   const options = {
