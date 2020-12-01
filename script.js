@@ -1,16 +1,18 @@
 "use strict";
 
-//DOM Selection
+//DOM Selection - Fixed DOM
 const container = document.querySelector("#cards-container");
-const images = document.querySelectorAll(".image");
-const covers = document.querySelectorAll(".cover");
-const cards = document.querySelectorAll(".card");
 const headerDisplay = document.querySelector("h1");
 const message = document.querySelector("#message");
 const stripe = document.querySelector(".stripe");
 const buttons = document.querySelectorAll("button");
 const header = document.querySelector("header");
 const nav = document.querySelector(".header");
+
+//Dynamic DOM
+let images = document.querySelectorAll(".image");
+let covers = document.querySelectorAll(".cover");
+let cards = document.querySelectorAll(".card");
 
 let openedCards = [];
 
@@ -44,8 +46,7 @@ const displayMatchResult = function (arr) {
   if (isMatch(arr[0].src, arr[1].src)) {
     message.textContent = "";
     message.insertAdjacentText("beforeend", "Shabbashhh!! ");
-    if (!checkAllMatches(gameLevel, gameLevels[3])) return;
-    headerDisplay.textContent = "";
+    if (!checkAllMatches()) return;
     headerDisplay.textContent = "That took a while.... 🤔";
     headerDisplay.style.backgroundColor = "limegreen";
   } else {
@@ -54,11 +55,12 @@ const displayMatchResult = function (arr) {
   }
 };
 
-const checkAllMatches = function (cardsCount, totalCards) {
+const checkAllMatches = function () {
   const unopenedImgs = [...images].filter(
     (image) => image.style.display === "none"
   );
-  if (totalCards - unopenedImgs.length === cardsCount) return true;
+  console.log(unopenedImgs);
+  if (unopenedImgs.length === 0) return true;
   return false;
 };
 
@@ -67,35 +69,46 @@ const isMatch = function (d1, d2) {
   return false;
 };
 
-const gameLevels = [6, 8, 12, 20];
+const gameLevels = [6, 8, 12, 20, 30];
 let gameLevel = gameLevels[1];
 
 stripe.addEventListener("click", function (e) {
   e.stopPropagation();
   if (e.target.id === "reset") displayLevels(selectLevels(imgUrls, gameLevel));
   if (e.target.textContent === "Trial") {
-    displayLevels(selectLevels(imgUrls, gameLevels[0]));
+    gameLevel = gameLevels[0];
+    cardsCreation(gameLevel);
+    displayLevels(selectLevels(imgUrls, gameLevel));
     buttons.forEach((btn) => btn.classList.remove("selected"));
     e.target.classList.add("selected");
-    gameLevel = gameLevels[0];
   }
   if (e.target.textContent === "Easy") {
-    displayLevels(selectLevels(imgUrls, gameLevels[1]));
+    gameLevel = gameLevels[1];
+    cardsCreation(gameLevel);
+    displayLevels(selectLevels(imgUrls, gameLevel));
     buttons.forEach((btn) => btn.classList.remove("selected"));
     e.target.classList.add("selected");
-    gameLevel = gameLevels[1];
   }
   if (e.target.textContent === "Medium") {
-    displayLevels(selectLevels(imgUrls, gameLevels[2]));
+    gameLevel = gameLevels[2];
+    cardsCreation(gameLevel);
+    displayLevels(selectLevels(imgUrls, gameLevel));
     buttons.forEach((btn) => btn.classList.remove("selected"));
     e.target.classList.add("selected");
-    gameLevel = gameLevels[2];
   }
   if (e.target.textContent === "Hard") {
-    displayLevels(selectLevels(imgUrls, gameLevels[3]));
+    gameLevel = gameLevels[3];
+    cardsCreation(gameLevel);
+    displayLevels(selectLevels(imgUrls, gameLevel));
     buttons.forEach((btn) => btn.classList.remove("selected"));
     e.target.classList.add("selected");
-    gameLevel = gameLevels[3];
+  }
+  if (e.target.textContent === "Ultra") {
+    gameLevel = gameLevels[4];
+    cardsCreation(gameLevel);
+    displayLevels(selectLevels(imgUrls, gameLevel));
+    buttons.forEach((btn) => btn.classList.remove("selected"));
+    e.target.classList.add("selected");
   }
 });
 
@@ -184,14 +197,16 @@ const fourInARow = function (urls) {
 };
 
 const displayLevels = function (urls) {
-  cards.forEach((card, i) => {
-    card.style.display = "none";
-    images[i].style.display = "none";
-  });
-  urls.forEach((_, i) => {
-    cards[i].style.display = "block";
-    covers[i].style.display = "block";
-  });
+  // cards.forEach((card, i) => {
+  //   card.style.display = "none";
+  //   images[i].style.display = "none";
+  // });
+  // urls.forEach((_, i) => {
+  //   cards[i].style.display = "block";
+  //   covers[i].style.display = "block";
+  // });
+  headerDisplay.textContent = "Match Up";
+  headerDisplay.style.backgroundColor = "steelblue";
   resetImgs(urls);
   if (urls.length < 7) threeInARow(urls);
   if (urls.length > 12) fiveInARow(urls);
@@ -208,7 +223,7 @@ const stickyNav = function () {
       if (!entry.isIntersecting) {
         nav.classList.add("sticky");
       } else {
-          nav.classList.remove("sticky");
+        nav.classList.remove("sticky");
       }
     });
   };
@@ -216,5 +231,22 @@ const stickyNav = function () {
   headerObserver.observe(header);
 };
 
-stickyNav();
+const cardsCreation = function (cardsCount) {
+  container.innerHTML = "";
+  cards = images = covers = null;
+  for (let i = 0; i < cardsCount; i++) {
+    let html = `
+    <div class="cards card">			
+      <div class="cover"></div>
+      <img src="" class='image' id= ${i + 1}>
+    </div>`;
+    container.insertAdjacentHTML("beforeend", html);
+  }
+  cards = document.querySelectorAll(".card");
+  images = document.querySelectorAll(".image");
+  covers = document.querySelectorAll(".cover");
+};
+
+cardsCreation(gameLevel);
 displayLevels(selectLevels(imgUrls, gameLevel));
+stickyNav();
