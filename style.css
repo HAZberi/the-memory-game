@@ -89,7 +89,7 @@ h1 {
   /*To Create Space in inline element first make it inline-block*/
   display: inline-block;
   /*now you have to set the width to get the space*/
-  width: 40%;
+  width: 37%;
   margin-left: 0%;
 }
 

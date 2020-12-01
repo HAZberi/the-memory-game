@@ -65,19 +65,43 @@ const displayMatchResult = function (arr) {
   moves++;
   movesBtn.textContent = `Moves: ${moves}`;
   if (isMatch(arr[0].src, arr[1].src)) {
-    message.textContent = "Shabbashhh!!";
+    message.textContent = "Shabbashhh 👏";
     if (!checkAllMatches()) return;
-    headerDisplay.textContent = `Great!! Completed In ${moves} Moves`;
-    headerDisplay.style.backgroundColor = "limegreen";
+    winningText();
   } else {
     message.textContent = "Beta Tum Sai Na Ho Paye Ga 😏😏";
   }
 };
 
+const winningText = function(){
+  const guessRate = ((gameLevel/2)/moves)*100;
+  if(moves === gameLevel/2){
+    headerDisplay.textContent = `You Nailed it! Your Guess Rate is ${+guessRate.toFixed(2)}%`;
+    headerDisplay.style.backgroundColor = "limegreen";
+    headerDisplay.style.color = "whitesmoke";
+  }
+  if(moves > (gameLevel/2) && moves < (2*(gameLevel/2))){
+    headerDisplay.textContent = `Great Work! Your Guess Rate is ${+guessRate.toFixed(2)}%`;
+    headerDisplay.style.backgroundColor = "lime";
+    headerDisplay.style.color = "steelblue";
+  }
+  if(moves > (2*(gameLevel/2)) && moves < (3*(gameLevel/2))){
+    headerDisplay.textContent = `That's Okay, Keep it up! Your Guess Rate is ${+guessRate.toFixed(2)}%`;
+    headerDisplay.style.backgroundColor = "gold";
+    headerDisplay.style.color = "steelblue";
+  }
+  if(moves > (3*(gameLevel/2))){
+    headerDisplay.textContent = `Poor Work, Try Again! Your Guess Rate is ${+guessRate.toFixed(2)}%`;
+    headerDisplay.style.backgroundColor = "orangered";
+    headerDisplay.style.color = "whitesmoke";
+  }
+}
+
 const checkAllMatches = function () {
   const unopenedImgs = [...images].filter(
     (image) => image.style.display === "none"
   );
+  console.log(unopenedImgs);
   if (unopenedImgs.length === 0) return true;
   return false;
 };
@@ -166,6 +190,7 @@ const reset = function(){
   movesBtn.textContent = `Moves: ${moves}`;
   headerDisplay.textContent = "Match Up";
   headerDisplay.style.backgroundColor = "steelblue";
+  headerDisplay.style.color = "whitesmoke";
 }
 
 const displayLevels = function (urls) {
