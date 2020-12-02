@@ -6,7 +6,7 @@ const headerDisplay = document.querySelector("h1");
 const message = document.querySelector("#message");
 const stripe = document.querySelector(".stripe");
 const buttons = document.querySelectorAll("button");
-const movesBtn = document.querySelector('.moves');
+const movesBtn = document.querySelector(".moves");
 const header = document.querySelector("header");
 const nav = document.querySelector(".header");
 
@@ -38,7 +38,8 @@ container.addEventListener("click", (e) => {
 
 stripe.addEventListener("click", function (e) {
   e.stopPropagation();
-  if (e.target.id === "shuffle") displayLevels(selectLevels(imgUrls, gameLevel));
+  if (e.target.id === "shuffle")
+    displayLevels(selectLevels(imgUrls, gameLevel));
   if (e.target.id === "reset") reset();
   if (e.target.textContent === "Easy") modeHandeller(gameLevels[0], e.target);
   if (e.target.textContent === "Medium") modeHandeller(gameLevels[1], e.target);
@@ -73,35 +74,43 @@ const displayMatchResult = function (arr) {
   }
 };
 
-const winningText = function(){
-  const guessRate = ((gameLevel/2)/moves)*100;
-  if(moves === gameLevel/2){
-    headerDisplay.textContent = `You Nailed it! Your Guess Rate is ${+guessRate.toFixed(2)}%`;
+const winningText = function () {
+  const guessRate = (gameLevel / 2 / moves) * 100;
+  console.log("check score");
+  if (moves === gameLevel / 2) {
+    headerDisplay.textContent = `You Nailed it! Your Guess Rate is ${+guessRate.toFixed(
+      2
+    )}%`;
     headerDisplay.style.backgroundColor = "limegreen";
     headerDisplay.style.color = "whitesmoke";
   }
-  if(moves > (gameLevel/2) && moves < (2*(gameLevel/2))){
-    headerDisplay.textContent = `Great Work! Your Guess Rate is ${+guessRate.toFixed(2)}%`;
+  if (moves > gameLevel / 2 && moves <= 2 * (gameLevel / 2)) {
+    headerDisplay.textContent = `Great Work! Your Guess Rate is ${+guessRate.toFixed(
+      2
+    )}%`;
     headerDisplay.style.backgroundColor = "lime";
     headerDisplay.style.color = "steelblue";
   }
-  if(moves > (2*(gameLevel/2)) && moves < (3*(gameLevel/2))){
-    headerDisplay.textContent = `That's Okay, Keep it up! Your Guess Rate is ${+guessRate.toFixed(2)}%`;
+  if (moves > 2 * (gameLevel / 2) && moves <= 3 * (gameLevel / 2)) {
+    headerDisplay.textContent = `That's Okay, Keep it up! Your Guess Rate is ${+guessRate.toFixed(
+      2
+    )}%`;
     headerDisplay.style.backgroundColor = "gold";
     headerDisplay.style.color = "steelblue";
   }
-  if(moves > (3*(gameLevel/2))){
-    headerDisplay.textContent = `Poor Work, Try Again! Your Guess Rate is ${+guessRate.toFixed(2)}%`;
+  if (moves > 3 * (gameLevel / 2)) {
+    headerDisplay.textContent = `Poor Work, Try Again! Your Guess Rate is ${+guessRate.toFixed(
+      2
+    )}%`;
     headerDisplay.style.backgroundColor = "orangered";
     headerDisplay.style.color = "whitesmoke";
   }
-}
+};
 
 const checkAllMatches = function () {
   const unopenedImgs = [...images].filter(
     (image) => image.style.display === "none"
   );
-  console.log(unopenedImgs);
   if (unopenedImgs.length === 0) return true;
   return false;
 };
@@ -111,13 +120,13 @@ const isMatch = function (d1, d2) {
   return false;
 };
 
-const modeHandeller = function(cardsCount, mode){
+const modeHandeller = function (cardsCount, mode) {
   gameLevel = cardsCount;
   cardsCreation(gameLevel);
   displayLevels(selectLevels(imgUrls, gameLevel));
   buttons.forEach((btn) => btn.classList.remove("selected"));
   mode.classList.add("selected");
-}
+};
 
 const shuffleArray = function (arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -182,25 +191,24 @@ const eightInARow = function (urls) {
   });
 };
 
-const reset = function(){
-  images.forEach(image => image.style.display = 'none')
-  covers.forEach(cover => cover.style.display = 'block');
+const reset = function () {
+  images.forEach((image) => (image.style.display = "none"));
+  covers.forEach((cover) => (cover.style.display = "block"));
   moves = 0;
   message.textContent = "Chalo Khelo 😋";
   movesBtn.textContent = `Moves: ${moves}`;
   headerDisplay.textContent = "Match Up";
   headerDisplay.style.backgroundColor = "steelblue";
   headerDisplay.style.color = "whitesmoke";
-}
+};
 
 const displayLevels = function (urls) {
   reset();
   resetImgs(urls);
   if (urls.length <= 12 && urls.length > 6) fourInARow(urls);
-  if (urls.length <=20 && urls.length > 12) fiveInARow(urls);
+  if (urls.length <= 20 && urls.length > 12) fiveInARow(urls);
   if (urls.length > 20) eightInARow(urls);
 };
-
 
 const stickyNav = function () {
   const options = {
@@ -236,20 +244,20 @@ const cardsCreation = function (cardsCount) {
   covers = document.querySelectorAll(".cover");
 };
 
-const populatePaths = function(totalUrls){
+const populatePaths = function (totalUrls) {
   let arr = [];
-  for(let i = 0; i < totalUrls; i++){
-    const path = `./img/img-${i+1}.jpg`;
+  for (let i = 0; i < totalUrls; i++) {
+    const path = `./img/img-${i + 1}.jpg`;
     arr.push(path);
   }
   return arr;
-}
+};
 
-const init = function(){
+const init = function () {
   imgUrls = shuffleArray(populatePaths(imagePaths));
   cardsCreation(gameLevel);
   displayLevels(selectLevels(imgUrls, gameLevel));
   stickyNav();
-}
+};
 //Game Init
 init();
