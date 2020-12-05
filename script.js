@@ -48,6 +48,9 @@ stripe.addEventListener("click", function (e) {
   if (e.target.textContent === "Legend") modeHandeller(gameLevels[4], e.target);
 });
 
+
+//Logic + Helpers
+
 const updateDisplay = function (arr) {
   if (!(arr.length === 2)) return arr;
   if (isMatch(arr[0].src, arr[1].src)) {
@@ -259,5 +262,8 @@ const init = function () {
   displayLevels(selectLevels(imgUrls, gameLevel));
   stickyNav();
 };
-//Game Init
+
+
+
+//Game Initialization
 init();
