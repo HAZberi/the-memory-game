@@ -80,9 +80,10 @@ h1 {
 .stripe {
   width: 100%;
   height: 30px;
+  display: flex;
   /*margin: auto; This property only work on divs not on text and button*/
   background: whitesmoke;
-  text-align: center;
+  justify-content: space-around;
 }
 
 #message {
@@ -91,6 +92,7 @@ h1 {
   /*now you have to set the width to get the space*/
   width: 37%;
   margin-left: 0%;
+  text-align: center;
 }
 
 .selected {
@@ -98,12 +100,14 @@ h1 {
   color: whitesmoke;
 }
 .moves {
+    width: 15%;
     background-color: steelblue;
     color: whitesmoke;
     text-transform: capitalize;
   }
 button {
   height: 100%;
+  width: fit-content;
   border: none;
   color: steelblue;
   background-color: whitesmoke;
