@@ -48,7 +48,6 @@ stripe.addEventListener("click", function (e) {
   if (e.target.textContent === "Legend") modeHandeller(gameLevels[4], e.target);
 });
 
-
 //Logic + Helpers
 
 const updateDisplay = function (arr) {
@@ -162,35 +161,24 @@ const selectLevels = function (urls, cardsCount) {
   return imgArr;
 };
 
-const threeInARow = function (urls) {
+const boxesInARow = function (urls, width, numBoxes) {
+  container.style.width = width + "%";
+  const cssClass = {
+    0: "cards",
+    3: "cardsThree",
+    4: "cardsFour",
+    5: "cardsFive",
+    8: "cardsEight",
+  };
   urls.forEach((_, i) => {
-    container.style.width = "60%";
-    cards[i].classList.remove("cards", "cardsFour", "cardsFive", "cardsEight");
-    cards[i].classList.add("cardsThree");
-  });
-};
-
-const fiveInARow = function (urls) {
-  container.style.width = "90%";
-  urls.forEach((_, i) => {
-    cards[i].classList.remove("cards", "cardsThree", "cardsFour", "cardsEight");
-    cards[i].classList.add("cardsFive");
-  });
-};
-
-const fourInARow = function (urls) {
-  container.style.width = "75%";
-  urls.forEach((_, i) => {
-    cards[i].classList.remove("cards", "cardsThree", "cardsFive", "cardsEight");
-    cards[i].classList.add("cardsFour");
-  });
-};
-
-const eightInARow = function (urls) {
-  container.style.width = "95%";
-  urls.forEach((_, i) => {
-    cards[i].classList.remove("cards", "cardsThree", "cardsFour", "cardsFive");
-    cards[i].classList.add("cardsEight");
+    cards[i].classList.remove(
+      cssClass["0"],
+      cssClass["3"],
+      cssClass["4"],
+      cssClass["5"],
+      cssClass["8"]
+    );
+    cards[i].classList.add(cssClass[numBoxes]);
   });
 };
 
@@ -208,9 +196,9 @@ const reset = function () {
 const displayLevels = function (urls) {
   reset();
   resetImgs(urls);
-  if (urls.length <= 12 && urls.length > 6) fourInARow(urls);
-  if (urls.length <= 20 && urls.length > 12) fiveInARow(urls);
-  if (urls.length > 20) eightInARow(urls);
+  if (urls.length <= 12 && urls.length > 6) boxesInARow(urls, 75, 4);
+  if (urls.length <= 20 && urls.length > 12) boxesInARow(urls, 90, 5);
+  if (urls.length > 20) boxesInARow(urls, 95, 8);
 };
 
 const stickyNav = function () {
@@ -263,9 +251,6 @@ const init = function () {
   stickyNav();
 };
 
-
-
 //Game Initialization
-
 
 init();
