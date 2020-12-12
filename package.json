@@ -1,0 +1,30 @@
+{
+  "name": "match-up",
+  "version": "1.0.0",
+  "description": "a unique take on memory games",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --out-dir ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HAZberi/the-memory-game.git"
+  },
+  "keywords": [
+    "memory",
+    "game",
+    "match",
+    "up",
+    "cars"
+  ],
+  "author": "Hassaan Ahmed Zuberi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HAZberi/the-memory-game/issues"
+  },
+  "homepage": "https://github.com/HAZberi/the-memory-game#readme",
+  "devDependencies": {
+    "parcel": "^1.12.4"
+  }
+}
