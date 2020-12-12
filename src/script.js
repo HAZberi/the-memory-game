@@ -238,7 +238,7 @@ const cardsCreation = function (cardsCount) {
 const populatePaths = function (totalUrls) {
   let arr = [];
   for (let i = 0; i < totalUrls; i++) {
-    const path = `../img/img-${i + 1}.jpg`;
+    const path = `./img/img-${i + 1}.jpg`;
     arr.push(path);
   }
   return arr;
