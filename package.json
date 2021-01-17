@@ -1,7 +1,7 @@
 {
   "name": "the-match-up",
   "version": "1.0.0",
-  "description": "a unique take on memory games",
+  "description": "A unique take on memory games",
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html",
