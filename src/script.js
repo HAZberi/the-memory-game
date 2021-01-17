@@ -68,11 +68,11 @@ const displayMatchResult = function (arr) {
   moves++;
   movesBtn.textContent = `Moves: ${moves}`;
   if (isMatch(arr[0].src, arr[1].src)) {
-    message.textContent = "Shabbashhh 👏";
+    message.textContent = "Awesome Work 👏";
     if (!checkAllMatches()) return;
     winningText();
   } else {
-    message.textContent = "Beta Tum Sai Na Ho Paye Ga 😏😏";
+    message.textContent = "That's NOT how it works! 😏😏";
   }
 };
 
@@ -186,7 +186,7 @@ const reset = function () {
   images.forEach((image) => (image.style.display = "none"));
   covers.forEach((cover) => (cover.style.display = "block"));
   moves = 0;
-  message.textContent = "Chalo Khelo 😋";
+  message.textContent = "Let's Play 😋";
   movesBtn.textContent = `Moves: ${moves}`;
   headerDisplay.textContent = "Match Up";
   headerDisplay.style.backgroundColor = "steelblue";
