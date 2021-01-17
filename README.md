@@ -15,4 +15,4 @@
 2. A player misses if the two cards turned pictures are not identical.
 3. The game continues until all cards in a selected level have been matched.
 
-## Play a Live Version of this game [here] (https://sharpenyourmemory.netlify.app/)
+## Play a Live Version of this game [here](https://sharpenyourmemory.netlify.app/)
