@@ -26,3 +26,11 @@
 * A user-friendly “Getting Started” documentation can be included.
 * A better memory evaluation system can be integrated to track user’s progress.
 
+### To run the project in development mode
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
